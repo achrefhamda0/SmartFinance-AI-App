@@ -1,0 +1,103 @@
+{{#with aside}}{{> auth-aside}}{{/with}}
+
+<main class="flex w-full flex-col justify-center px-5 py-10 sm:px-10 lg:w-[54%] lg:py-14">
+
+    <div class="mx-auto w-full max-w-md">
+
+        <a href="/" class="inline-flex items-center gap-2 lg:hidden" aria-label="SmartFinance AI, accueil">
+            <span class="flex h-8 w-8 shrink-0">{{> svg/logo}}</span>
+            <span class="font-display font-semibold tracking-tight text-white">SmartFinance<span class="text-brand-300"> AI</span></span>
+        </a>
+
+        <div class="mt-8 lg:mt-0" data-reveal="fade-up">
+            <p class="eyebrow">Connexion</p>
+            <h1 class="mt-4 font-display text-3xl font-semibold tracking-tight text-white">
+                Accédez à votre espace
+            </h1>
+            <p class="mt-3 text-sm leading-relaxed text-slate-400">
+                Vos exercices consolidés, vos rapports et vos prévisions vous attendent.
+            </p>
+        </div>
+
+        {{#if notice}}
+            <div class="form-alert form-alert--success mt-6">
+                <span class="mt-0.5 h-4 w-4 shrink-0">{{{icon "checkCircle"}}}</span>
+                <span>{{notice}}</span>
+            </div>
+        {{/if}}
+
+        {{#if errors.password}}
+            <div class="form-alert mt-6">
+                <span class="mt-0.5 h-4 w-4 shrink-0">{{{icon "alert"}}}</span>
+                <span>{{errors.password}}</span>
+            </div>
+        {{/if}}
+
+        <form method="post" action="/connexion" class="mt-8 space-y-5" novalidate data-validate data-loading-button>
+
+            <div class="field{{#if errors.email}} is-invalid{{/if}}">
+                <label class="field__label" for="email">Adresse e-mail</label>
+                <div class="field__control">
+                    <span class="field__icon"><span class="h-4 w-4">{{{icon "mail"}}}</span></span>
+                    <input class="field__input field__input--with-icon" id="email" name="email" type="email"
+                        value="{{values.email}}" placeholder="prenom.nom@societe.com" autocomplete="email" required autofocus
+                        data-validate-control data-error-required="Renseignez votre adresse e-mail.">
+                </div>
+                {{#if errors.email}}
+                    <p class="field__error" data-validate-message>{{errors.email}}</p>
+                {{/if}}
+            </div>
+
+            <div class="field{{#if errors.password}} is-invalid{{/if}}">
+                <label class="field__label" for="password">
+                    Mot de passe
+                    <a class="link-accent" href="#">Mot de passe oublié ?</a>
+                </label>
+                <div class="field__control">
+                    <span class="field__icon"><span class="h-4 w-4">{{{icon "lock"}}}</span></span>
+                    <input class="field__input field__input--with-icon" id="password" name="password" type="password"
+                        placeholder="Votre mot de passe" autocomplete="current-password" required
+                        data-password="login"
+                        data-validate-control data-error-required="Saisissez votre mot de passe.">
+                    <button type="button" class="field__action" data-password-toggle="login"
+                        aria-label="Afficher le mot de passe" aria-pressed="false">
+                        <span class="h-4 w-4" data-icon-off>{{{icon "eye"}}}</span>
+                        <span class="hidden h-4 w-4" data-icon-on>{{{icon "eyeOff"}}}</span>
+                    </button>
+                </div>
+                {{#if errors.password}}
+                    <p class="field__error" data-validate-message>{{errors.password}}</p>
+                {{/if}}
+            </div>
+
+            <label class="checkbox">
+                <input type="checkbox" name="remember" checked>
+                <span>Rester connecté sur cet appareil pendant 7 jours</span>
+            </label>
+
+            <button type="submit" class="btn-primary btn-lg w-full" data-busy-label="Connexion…">
+                <span data-submit-label>Se connecter</span>
+                <span class="h-4 w-4">{{{icon "arrowRight"}}}</span>
+            </button>
+
+            <div class="divider">ou</div>
+
+            <a href="#" class="btn-secondary w-full">
+                <span class="h-4 w-4">{{{icon "lock"}}}</span>
+                Se connecter avec le SSO de l’entreprise
+            </a>
+
+            <p class="text-center text-xs text-slate-500">
+                Pas encore de compte ?
+                <a class="link-accent" href="/inscription">Créer un compte gratuit</a>
+            </p>
+
+        </form>
+
+        <p class="mt-8 flex items-center justify-center gap-2 text-xs text-slate-600">
+            <span class="h-4 w-4">{{{icon "shield"}}}</span>
+            Connexion chiffrée · aucune donnée partagée avec un tiers
+        </p>
+
+    </div>
+</main>

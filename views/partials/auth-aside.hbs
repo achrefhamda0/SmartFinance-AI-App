@@ -1,0 +1,43 @@
+<aside class="auth-aside">
+    <span class="auth-aside__glow" aria-hidden="true"></span>
+
+    <div class="relative">
+        <a href="/" class="flex items-center gap-2.5" aria-label="SmartFinance AI, accueil">
+            <span class="flex h-9 w-9 shrink-0">{{> svg/logo}}</span>
+            <span class="font-display text-lg font-semibold tracking-tight text-white">SmartFinance<span class="text-brand-300"> AI</span></span>
+        </a>
+    </div>
+
+    <div class="relative max-w-md">
+        <p class="eyebrow">{{eyebrow}}</p>
+        <p class="auth-aside__quote mt-5">{{quote}}</p>
+
+        <div class="auth-aside__meta mt-7">
+            <span class="auth-aside__avatar">{{initials}}</span>
+            <span>
+                <span class="block text-sm font-medium text-white">{{author}}</span>
+                <span class="block text-xs text-slate-500">{{authorRole}}</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="relative">
+        <div class="grid grid-cols-3 gap-5">
+            {{#each stats}}
+                <div class="auth-stat">
+                    <span class="auth-stat__value">{{value}}</span>
+                    <span class="auth-stat__label">{{label}}</span>
+                </div>
+            {{/each}}
+        </div>
+
+        <ul class="mt-7 space-y-3">
+            {{#each checks}}
+                <li class="auth-check">
+                    <span class="auth-check__icon"><span class="h-3 w-3">{{{icon "check"}}}</span></span>
+                    {{this}}
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</aside>

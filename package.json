@@ -1,0 +1,40 @@
+{
+  "name": "smartfinance-ai-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SmartFinance AI - Plateforme d'analyse financière augmentée par le Machine Learning",
+  "type": "module",
+  "engines": {
+    "node": ">=22.22.2"
+  },
+  "scripts": {
+    "dev": "npm run build:css && concurrently -n css,server -c cyan,magenta \"npm:dev:css\" \"npm:dev:server\"",
+    "dev:watch": "concurrently -n css,server -c cyan,magenta \"npm:dev:css\" \"npm:dev:server\"",
+    "dev:css": "tailwindcss -i src/assets/css/input.css -o public/assets/css/main.css --watch",
+    "dev:server": "node --watch app.js",
+    "build": "npm run build:css && npm run build:vendor",
+    "build:css": "tailwindcss -i src/assets/css/input.css -o public/assets/css/main.css --minify",
+    "build:vendor": "node scripts/copy-vendor.js",
+    "db:migrate": "node scripts/migrate.js",
+    "start": "cross-env NODE_ENV=production node app.js",
+    "clean": "node -e \"require('node:fs').rmSync('public/assets/css',{recursive:true,force:true});require('node:fs').rmSync('public/vendor',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "compression": "^1.8.1",
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "express-handlebars": "^9.0.1",
+    "gsap": "^3.15.0",
+    "helmet": "^8.3.0",
+    "morgan": "^1.12.1",
+    "motion": "^13.4.6",
+    "mysql2": "^3.14.5",
+    "opencode-ai": "^1.18.34"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "concurrently": "^10.0.5",
+    "cross-env": "^10.1.0",
+    "tailwindcss": "^4.3.3"
+  }
+}

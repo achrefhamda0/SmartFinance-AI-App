@@ -1,0 +1,79 @@
+<header data-nav class="sticky top-0 z-50" data-state="scrolled">
+    <div class="container-shell flex h-18 items-center justify-between gap-6">
+        <a href="/" class="flex items-center gap-2.5">
+            <span class="flex h-9 w-9 shrink-0">{{> svg/logo}}</span>
+            <span class="font-display text-lg font-semibold tracking-tight text-white">SmartFinance<span class="text-brand-300"> AI</span></span>
+        </a>
+
+        <div class="flex items-center gap-3">
+            <span class="hidden text-sm text-slate-500 sm:inline">
+                {{user.firstName}} {{user.lastName}} · {{user.company}}
+            </span>
+            <form method="post" action="/deconnexion">
+                <button type="submit" class="btn-secondary btn-sm">
+                    <span class="h-4 w-4">{{{icon "logOut"}}}</span>
+                    Déconnexion
+                </button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<main class="section">
+    <div class="container-shell">
+
+        <p class="eyebrow" data-reveal="fade-up">Espace connecté</p>
+        <h1 class="section-title" data-reveal="fade-up" style="--reveal-delay: 1">
+            Bonjour {{user.firstName}}, votre espace est prêt
+        </h1>
+        <p class="section-subtitle" data-reveal="fade-up" style="--reveal-delay: 2">
+            {{user.company}} — compte créé le {{user.createdAt}}. L’import de vos premiers fichiers ouvrira la voie au tableau de bord complet.
+        </p>
+
+        <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+
+            <article class="glass-card rounded-2xl p-6" data-reveal="fade-up">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-brand-400/20 bg-brand-400/10 text-brand-300">
+                    <span class="h-5 w-5">{{{icon "upload"}}}</span>
+                </span>
+                <h2 class="font-display mt-5 text-base font-semibold text-white">Importer un fichier</h2>
+                <p class="mt-2 text-sm text-slate-400">FEC, FECF/AGREP, balance ou journal d’écritures.</p>
+                <span class="mt-5 inline-block rounded-full bg-white/5 px-3 py-1 text-xs text-slate-500">Bientôt disponible</span>
+            </article>
+
+            <article class="glass-card rounded-2xl p-6" data-reveal="fade-up" style="--reveal-delay: 1">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-brand-400/20 bg-brand-400/10 text-brand-300">
+                    <span class="h-5 w-5">{{{icon "chart"}}}</span>
+                </span>
+                <h2 class="font-display mt-5 text-base font-semibold text-white">Analyse de la performance</h2>
+                <p class="mt-2 text-sm text-slate-400">Ratios, écarts et référentiels sectoriels par exercice.</p>
+                <span class="mt-5 inline-block rounded-full bg-white/5 px-3 py-1 text-xs text-slate-500">Bientôt disponible</span>
+            </article>
+
+            <article class="glass-card rounded-2xl p-6" data-reveal="fade-up" style="--reveal-delay: 2">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-violet-400/25 bg-violet-400/10 text-violet-300">
+                    <span class="h-5 w-5">{{{icon "sparkles"}}}</span>
+                </span>
+                <h2 class="font-display mt-5 text-base font-semibold text-white">Prévisions</h2>
+                <p class="mt-2 text-sm text-slate-400">Trajectoire projetée avec intervalle de confiance.</p>
+                <span class="mt-5 inline-block rounded-full bg-white/5 px-3 py-1 text-xs text-slate-500">Bientôt disponible</span>
+            </article>
+
+            <article class="glass-card rounded-2xl p-6" data-reveal="fade-up" style="--reveal-delay: 3">
+                <span class="flex h-10 w-10 items-center justify-center rounded-xl border border-rose-400/25 bg-rose-400/10 text-rose-300">
+                    <span class="h-5 w-5">{{{icon "alert"}}}</span>
+                </span>
+                <h2 class="font-display mt-5 text-base font-semibold text-white">Anomalies</h2>
+                <p class="mt-2 text-sm text-slate-400">Alertes classées par gravité et par score de confiance.</p>
+                <span class="mt-5 inline-block rounded-full bg-white/5 px-3 py-1 text-xs text-slate-500">Bientôt disponible</span>
+            </article>
+
+        </div>
+
+        <p class="mt-10 text-sm text-slate-500">
+            Besoin d’aide ? Écrivez-nous à
+            <a class="link-accent" href="mailto:contact@smartfinance.ai">contact@smartfinance.ai</a>.
+        </p>
+
+    </div>
+</main>

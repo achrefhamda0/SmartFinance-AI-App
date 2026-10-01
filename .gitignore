@@ -1,0 +1,19 @@
+# Dépendances
+node_modules/
+
+# Variables d'environnement (ne jamais versionner)
+.env
+.env.local
+.env.*.local
+
+# Assets générés
+public/assets/css/
+public/vendor/
+
+# Système et éditeurs
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+.vscode/
+.idea/

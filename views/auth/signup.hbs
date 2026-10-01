@@ -1,0 +1,204 @@
+{{#with aside}}{{> auth-aside}}{{/with}}
+
+<main class="flex w-full flex-col justify-center px-5 py-10 sm:px-10 lg:w-[54%] lg:py-14">
+
+    <div class="mx-auto w-full max-w-md">
+
+        <a href="/" class="inline-flex items-center gap-2 lg:hidden" aria-label="SmartFinance AI, accueil">
+            <span class="flex h-8 w-8 shrink-0">{{> svg/logo}}</span>
+            <span class="font-display font-semibold tracking-tight text-white">SmartFinance<span class="text-brand-300"> AI</span></span>
+        </a>
+
+        <div class="mt-8 lg:mt-0" data-reveal="fade-up">
+            <p class="eyebrow">Créer un compte</p>
+            <h1 class="mt-4 font-display text-3xl font-semibold tracking-tight text-white">
+                Démarrez votre analyse en 14 jours
+            </h1>
+            <p class="mt-3 text-sm leading-relaxed text-slate-400">
+                Centralisez vos comptes annuels, automatisez vos calculs et laissez les modèles signaler ce qui échappe au regard.
+            </p>
+        </div>
+
+        {{#if errors.email}}
+            <div class="form-alert mt-6">
+                <span class="mt-0.5 h-4 w-4 shrink-0">{{{icon "alert"}}}</span>
+                <span>{{errors.email}}</span>
+            </div>
+        {{/if}}
+
+        <form method="post" action="/inscription" class="mt-8 space-y-5" novalidate data-validate data-loading-button>
+
+            <input type="hidden" name="plan" value="{{plan}}">
+
+            <div class="grid gap-5 sm:grid-cols-2">
+                <div class="field{{#if errors.firstName}} is-invalid{{/if}}">
+                    <label class="field__label" for="firstName">Prénom</label>
+                    <div class="field__control">
+                        <span class="field__icon"><span class="h-4 w-4">{{{icon "users"}}}</span></span>
+                        <input class="field__input field__input--with-icon" id="firstName" name="firstName" type="text"
+                            value="{{values.firstName}}" placeholder="Amine" autocomplete="given-name" required
+                            data-validate-control data-error-required="Indiquez votre prénom.">
+                    </div>
+                    {{#if errors.firstName}}
+                        <p class="field__error" data-validate-message>{{errors.firstName}}</p>
+                    {{/if}}
+                </div>
+
+                <div class="field{{#if errors.lastName}} is-invalid{{/if}}">
+                    <label class="field__label" for="lastName">Nom</label>
+                    <div class="field__control">
+                        <span class="field__icon"><span class="h-4 w-4">{{{icon "users"}}}</span></span>
+                        <input class="field__input field__input--with-icon" id="lastName" name="lastName" type="text"
+                            value="{{values.lastName}}" placeholder="Benali" autocomplete="family-name" required
+                            data-validate-control data-error-required="Indiquez votre nom.">
+                    </div>
+                    {{#if errors.lastName}}
+                        <p class="field__error" data-validate-message>{{errors.lastName}}</p>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="field{{#if errors.company}} is-invalid{{/if}}">
+                <label class="field__label" for="company">Société ou cabinet</label>
+                <div class="field__control">
+                    <span class="field__icon"><span class="h-4 w-4">{{{icon "building"}}}</span></span>
+                    <input class="field__input field__input--with-icon" id="company" name="company" type="text"
+                        value="{{values.company}}" placeholder="Groupe Helios" autocomplete="organization" required
+                        data-validate-control data-error-required="Indiquez votre société ou votre cabinet.">
+                </div>
+                {{#if errors.company}}
+                    <p class="field__error" data-validate-message>{{errors.company}}</p>
+                {{/if}}
+            </div>
+
+            <div class="field{{#if errors.email}} is-invalid{{/if}}">
+                <label class="field__label" for="email">E-mail professionnel</label>
+                <div class="field__control">
+                    <span class="field__icon"><span class="h-4 w-4">{{{icon "mail"}}}</span></span>
+                    <input class="field__input field__input--with-icon" id="email" name="email" type="email"
+                        value="{{values.email}}" placeholder="prenom.nom@societe.com" autocomplete="email" required
+                        data-validate-control data-error-required="Renseignez votre adresse e-mail.">
+                </div>
+                {{#if errors.email}}
+                    <p class="field__error" data-validate-message>{{errors.email}}</p>
+                {{else}}
+                    <p class="field__hint">C’est avec cette adresse que vous recevrez le lien d’activation.</p>
+                {{/if}}
+            </div>
+
+            <div class="field" data-role-group>
+                <span class="field__label" id="role-label">Profil de l’organisation</span>
+
+                <div class="grid gap-3 sm:grid-cols-3" role="radiogroup" aria-labelledby="role-label">
+                    <label class="role-option">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/4 text-brand-300">
+                            <span class="h-4 w-4">{{{icon "building"}}}</span>
+                        </span>
+                        <span class="mt-3 block text-sm font-medium text-white">Entreprise</span>
+                        <span class="mt-1 block text-xs text-slate-500">PME, ETI, industrie</span>
+                        <input class="mt-4" type="radio" name="role" value="company" {{#if roleChecked.company}}checked{{/if}} required>
+                    </label>
+                    <label class="role-option">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/4 text-brand-300">
+                            <span class="h-4 w-4">{{{icon "scale"}}}</span>
+                        </span>
+                        <span class="mt-3 block text-sm font-medium text-white">Cabinet</span>
+                        <span class="mt-1 block text-xs text-slate-500">Missions récurrentes</span>
+                        <input class="mt-4" type="radio" name="role" value="cabinet" {{#if roleChecked.cabinet}}checked{{/if}}>
+                    </label>
+                    <label class="role-option">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/4 text-brand-300">
+                            <span class="h-4 w-4">{{{icon "pieChart"}}}</span>
+                        </span>
+                        <span class="mt-3 block text-sm font-medium text-white">Direction fin.</span>
+                        <span class="mt-1 block text-xs text-slate-500">Pilotage et prévision</span>
+                        <input class="mt-4" type="radio" name="role" value="finance" {{#if roleChecked.finance}}checked{{/if}}>
+                    </label>
+                </div>
+
+                {{#if errors.role}}
+                    <p class="field__error">{{errors.role}}</p>
+                {{/if}}
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2">
+                <div class="field{{#if errors.password}} is-invalid{{/if}}">
+                    <label class="field__label" for="password">Mot de passe</label>
+                    <div class="field__control">
+                        <span class="field__icon"><span class="h-4 w-4">{{{icon "lock"}}}</span></span>
+                        <input class="field__input field__input--with-icon" id="password" name="password" type="password"
+                            placeholder="10 caractères minimum" autocomplete="new-password" required minlength="10"
+                            data-password="signup-password" data-strength-source
+                            data-validate-control data-error-required="Choisissez un mot de passe.">
+                        <button type="button" class="field__action" data-password-toggle="signup-password"
+                            aria-label="Afficher le mot de passe" aria-pressed="false">
+                            <span class="h-4 w-4" data-icon-off>{{{icon "eye"}}}</span>
+                            <span class="hidden h-4 w-4" data-icon-on>{{{icon "eyeOff"}}}</span>
+                        </button>
+                    </div>
+
+                    <div class="strength" data-strength data-level="0" aria-hidden="true">
+                        <span class="strength__bar"></span>
+                        <span class="strength__bar"></span>
+                        <span class="strength__bar"></span>
+                        <span class="strength__bar"></span>
+                    </div>
+                    <p class="strength__label" data-strength-label></p>
+
+                    {{#if errors.password}}
+                        <p class="field__error" data-validate-message>{{errors.password}}</p>
+                    {{/if}}
+                </div>
+
+                <div class="field{{#if errors.confirm}} is-invalid{{/if}}">
+                    <label class="field__label" for="confirm">Confirmation</label>
+                    <div class="field__control">
+                        <span class="field__icon"><span class="h-4 w-4">{{{icon "key"}}}</span></span>
+                        <input class="field__input field__input--with-icon" id="confirm" name="confirm" type="password"
+                            placeholder="Répétez le mot de passe" autocomplete="new-password" required
+                            data-password="signup-confirm"
+                            data-validate-control data-match="#password" data-error-match="Les mots de passe ne correspondent pas.">
+                        <button type="button" class="field__action" data-password-toggle="signup-confirm"
+                            aria-label="Afficher la confirmation" aria-pressed="false">
+                            <span class="h-4 w-4" data-icon-off>{{{icon "eye"}}}</span>
+                            <span class="hidden h-4 w-4" data-icon-on>{{{icon "eyeOff"}}}</span>
+                        </button>
+                    </div>
+                    {{#if errors.confirm}}
+                        <p class="field__error" data-validate-message>{{errors.confirm}}</p>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="field{{#if errors.terms}} is-invalid{{/if}}">
+                <label class="checkbox">
+                    <input type="checkbox" name="terms" {{#if values.terms}}checked{{/if}}>
+                    <span>
+                        J’accepte les <a class="link-accent" href="#">conditions d’utilisation</a> et la
+                        <a class="link-accent" href="#">politique de confidentialité</a>.
+                    </span>
+                </label>
+                {{#if errors.terms}}
+                    <p class="field__error">{{errors.terms}}</p>
+                {{/if}}
+            </div>
+
+            <button type="submit" class="btn-primary btn-lg w-full" data-busy-label="Création du compte…">
+                <span data-submit-label>Créer mon compte</span>
+                <span class="h-4 w-4">{{{icon "arrowRight"}}}</span>
+            </button>
+
+            <p class="text-center text-xs text-slate-500">
+                Déjà un compte ?
+                <a class="link-accent" href="/connexion">Se connecter</a>
+            </p>
+
+        </form>
+
+        <p class="mt-8 flex items-center justify-center gap-2 text-xs text-slate-600">
+            <span class="h-4 w-4">{{{icon "shield"}}}</span>
+            Données chiffrées, hébergées dans l’Union européenne
+        </p>
+
+    </div>
+</main>
